@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SIPEEN — Website Pribadi</title>
+  <meta name="description" content="Website pribadi SIPEEN: profil, proyek, tulisan, dan cara menghubungi." />
+  <meta property="og:title" content="SIPEEN — Website Pribadi" />
+  <meta property="og:description" content="Profil, portofolio proyek, dan kontak." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230ea5e9'/%3E%3Ctext x='50' y='58' font-size='44' text-anchor='middle' fill='white' font-family='Arial, sans-serif'%3ES%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #0f172a;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --brand: #0ea5e9;
+      --brand-2: #22d3ee;
+      --ring: rgba(14,165,233,.35);
+      --card: #111827;
+      --border: #1f2937;
+    }
+    :root.light {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --brand: #0ea5e9;
+      --brand-2: #2563eb;
+      --ring: rgba(14,165,233,.35);
+      --card: #ffffff;
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; scroll-behavior: smooth; }
+    body {
+      margin: 0; font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text); background: radial-gradient(1200px 600px at 70% -10%, rgba(34,211,238,.15), transparent 50%), var(--bg);
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; backdrop-filter: saturate(140%) blur(8px);
+      background: color-mix(in srgb, var(--panel) 88%, transparent);
+      border-bottom: 1px solid var(--border); z-index: 50;
+    }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding: .8rem 0; }
+    .logo { display:flex; align-items:center; gap:.6rem; font-weight:700; letter-spacing:.4px; }
+    .logo-badge { width:30px; height:30px; border-radius:10px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); display:grid; place-items:center; color:#fff; font-weight:800; }
+    .nav a { color: var(--muted); font-weight:600; margin-left: 1rem; }
+    .nav a:hover { color: var(--text); }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.6rem .9rem; border-radius:12px; border:1px solid var(--border); background: linear-gradient(180deg, color-mix(in srgb, var(--panel) 86%, transparent), color-mix(in srgb, var(--panel) 96%, transparent)); color:var(--text); box-shadow: 0 0 0 0 var(--ring); transition: box-shadow .2s, transform .08s; }
+    .btn:hover { box-shadow: 0 0 0 6px var(--ring); }
+    .btn:active { transform: translateY(1px); }
+
+    /* Hero */
+    .hero { padding: 6rem 0 4rem; display:grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; align-items:center; }
+    .hero h1 { font-size: clamp(2rem, 3vw + 1rem, 3.4rem); line-height:1.1; margin: 0 0 1rem; }
+    .tag { display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .6rem; border:1px solid var(--border); border-radius:999px; color:var(--muted); font-size:.9rem; }
+    .badge-dot { width:8px; height:8px; border-radius:999px; background: var(--brand); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 20%, transparent); }
+    .lead { color: var(--muted); margin: 1rem 0 1.6rem; }
+    .hero-visual { aspect-ratio: 1/1; border-radius: 24px; border:1px solid var(--border); background: radial-gradient(400px 300px at 70% 20%, rgba(14,165,233,.18), transparent 40%), linear-gradient(180deg, color-mix(in srgb, var(--panel) 80%, transparent), color-mix(in srgb, var(--panel) 96%, transparent)); display:grid; place-items:center; }
+    .orb { width: 68%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 30% 35%, #fff, #dbeafe 35%, transparent 38%), radial-gradient(circle at 70% 65%, color-mix(in srgb, var(--brand) 85%, white), transparent 60%), radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--brand-2) 70%, white), transparent 70%); filter: drop-shadow(0 12px 40px rgba(14,165,233,.35)); }
+
+    /* Sections */
+    section { padding: 4rem 0; }
+    .section-title { font-size: 1.6rem; margin: 0 0 1.2rem; }
+    .grid { display:grid; gap: 1.2rem; }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 900px){ .hero { grid-template-columns: 1fr; } .hero-visual { order: -1; } .grid-3 { grid-template-columns: 1fr; } .grid-2 { grid-template-columns: 1fr; } }
+
+    /* Cards */
+    .card { background: linear-gradient(180deg, color-mix(in srgb, var(--card) 92%, transparent), color-mix(in srgb, var(--card) 98%, transparent)); border:1px solid var(--border); border-radius: 16px; padding: 1.1rem; transition: transform .15s, box-shadow .2s, border-color .2s; box-shadow: 0 6px 24px rgba(2,6,23,.18); }
+    .card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--brand) 30%, var(--border)); box-shadow: 0 10px 28px rgba(2,6,23,.28); }
+    .muted { color: var(--muted); }
+    .chip { display:inline-flex; align-items:center; gap:.4rem; border:1px solid var(--border); border-radius: 999px; padding:.25rem .55rem; font-size:.85rem; color: var(--muted); }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 1.4rem; }
+    .timeline:before { content:""; position:absolute; left:.5rem; top:.2rem; bottom:.2rem; width:2px; background: linear-gradient(var(--brand), transparent); }
+    .timeline-item { position: relative; margin: .9rem 0; }
+    .timeline-item:before{ content:""; position:absolute; left:-.1rem; top:.3rem; width:.7rem; height:.7rem; border-radius:999px; background: var(--brand); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 20%, transparent); }
+
+    /* Footer */
+    footer { border-top:1px solid var(--border); padding: 2rem 0; color: var(--muted); }
+
+    /* Animations */
+    [data-animate] { opacity: 0; transform: translateY(12px); transition: .6s ease; }
+    [data-animate].in { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav" role="navigation" aria-label="Navigasi utama">
+      <div class="logo">
+        <div class="logo-badge" aria-hidden="true">S</div>
+        <a href="#home" aria-label="Ke bagian awal">SIPEEN</a>
+      </div>
+      <nav>
+        <a href="#about">Tentang</a>
+        <a href="#projects">Proyek</a>
+        <a href="#writing">Tulisan</a>
+        <a href="#contact">Kontak</a>
+        <button id="themeBtn" class="btn" aria-label="Ganti tema">🌓 Tema</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero container" id="home">
+      <div>
+        <span class="tag"><span class="badge-dot" aria-hidden="true"></span> Halo, saya SIPEEN</span>
+        <h1 data-animate>Saya membangun hal-hal yang <span style="background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">berguna & menyenangkan</span>.</h1>
+        <p class="lead" data-animate>
+          Seorang pembelajar yang suka ngoprek web, Python, dan otomasi.
+          Di sini saya membagikan proyek, tulisan, dan cara menghubungi saya.
+        </p>
+        <div class="actions" data-animate>
+          <a class="btn" href="#projects">🚀 Lihat Proyek</a>
+          <a class="btn" href="#contact">✉️  Hubungi</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orb"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">Tentang Saya</h2>
+        <div class="grid grid-2">
+          <div class="card" data-animate>
+            <h3>Singkat</h3>
+            <p class="muted">Saya tertarik pada pengembangan web, scripting Python, dan UX sederhana yang cepat dipakai.</p>
+            <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.6rem">
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">Python</span>
+              <span class="chip">Git</span>
+            </div>
+          </div>
+          <div class="card" data-animate>
+            <h3>Pengalaman ringkas</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <strong>2024–2025</strong> • Membangun proyek kecil dan otomasi skrip.
+              </div>
+              <div class="timeline-item">
+                <strong>2023</strong> • Mulai belajar front-end & Python dasar.
+              </div>
+              <div class="timeline-item">
+                <strong>2022</strong> • Menulis catatan & blog teknis.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">Proyek Pilihan</h2>
+        <div class="grid grid-3">
+          <article class="card" data-animate>
+            <h3>Generator Portofolio</h3>
+            <p class="muted">CLI kecil untuk membuat halaman portofolio statis dari file YAML.</p>
+            <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin:.4rem 0 .8rem">
+              <span class="chip">Python</span><span class="chip">CLI</span><span class="chip">Markdown</span>
+            </div>
+            <a class="btn" href="#contact">Coba / Minta Demo</a>
+          </article>
+          <article class="card" data-animate>
+            <h3>Website Pribadi</h3>
+            <p class="muted">Template ringan, responsif, dengan mode gelap & animasi halus.</p>
+            <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin:.4rem 0 .8rem">
+              <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">A11y</span>
+            </div>
+            <a class="btn" href="#home">Lihat</a>
+          </article>
+          <article class="card" data-animate>
+            <h3>API Catatan</h3>
+            <p class="muted">API sederhana untuk catatan dengan autentikasi token.</p>
+            <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin:.4rem 0 .8rem">
+              <span class="chip">Node</span><span class="chip">REST</span><span class="chip">JWT</span>
+            </div>
+            <a class="btn" href="#contact">Repo (minta tautan)</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WRITING -->
+    <section id="writing">
+      <div class="container">
+        <h2 class="section-title">Tulisan Terbaru</h2>
+        <div class="grid grid-2">
+          <article class="card" data-animate>
+            <h3>Belajar Web dari Nol</h3>
+            <p class="muted">Catatan singkat langkah-langkah membuat website pertama tanpa framework.</p>
+            <a class="btn" href="#">Baca</a>
+          </article>
+          <article class="card" data-animate>
+            <h3>Tips Produktif di VS Code</h3>
+            <p class="muted">Ekstensi, shortcut, dan trik kecil biar ngoding makin cepat.</p>
+            <a class="btn" href="#">Baca</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title">Kontak</h2>
+        <div class="grid grid-2">
+          <form class="card" data-animate id="contactForm" aria-label="Form kontak">
+            <label>Nama
+              <input name="name" required placeholder="Nama kamu" />
+            </label>
+            <label>Email
+              <input type="email" name="email" required placeholder="kamu@email.com" />
+            </label>
+            <label>Pesan
+              <textarea name="message" rows="5" required placeholder="Tulis pesanmu di sini..."></textarea>
+            </label>
+            <button class="btn" type="submit">Kirim</button>
+            <p class="muted" id="formMsg" role="status" aria-live="polite" style="margin: .5rem 0 0"></p>
+          </form>
+          <div class="card" data-animate>
+            <h3>Info</h3>
+            <p class="muted">Butuh bantuan, kolaborasi, atau ingin say hi? Silakan kirim pesan lewat formulir atau email langsung.</p>
+            <ul>
+              <li>✉️ <a href="mailto:halo@sipeen.example">halo@sipeen.example</a></li>
+              <li>🐙 GitHub: <a href="#">github.com/sipeen</a></li>
+              <li>💼 LinkedIn: <a href="#">linkedin.com/in/sipeen</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> SIPEEN • Dibuat dengan HTML+CSS murni • <a class="muted" href="#home">Kembali ke atas ↑</a></div>
+  </footer>
+
+  <style>
+    /* Basic form styling */
+    form label { display:grid; gap:.4rem; margin:.6rem 0; }
+    input, textarea { padding:.7rem .9rem; border-radius:12px; border:1px solid var(--border); background: var(--panel); color: var(--text); outline: none; }
+    input:focus, textarea:focus { box-shadow: 0 0 0 6px var(--ring); border-color: color-mix(in srgb, var(--brand) 40%, var(--border)); }
+    ul { margin: .2rem 0 0; padding-left: 1rem; }
+  </style>
+
+  <script>
+    // Tema gelap/terang
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') root.classList.add('light');
+    themeBtn.addEventListener('click', () => {
+      root.classList.toggle('light');
+      localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
+    });
+
+    // Tahun footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Animasi masuk saat discroll
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => e.target.classList.toggle('in', e.isIntersecting));
+    }, { threshold: .14 });
+    document.querySelectorAll('[data-animate]').forEach(el => io.observe(el));
+
+    // Form kontak (demo: kirim ke mailto)
+    const form = document.getElementById('contactForm');
+    const msg = document.getElementById('formMsg');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = data.get('name');
+      const email = data.get('email');
+      const text = data.get('message');
+      // Validasi sederhana
+      if (!name || !email || !text) { msg.textContent = 'Lengkapi semua kolom.'; return; }
+      // Mailto fallback
+      const subject = encodeURIComponent('Pesan dari ' + name);
+      const body = encodeURIComponent(text + '\n\n— ' + name + ' (' + email + ')');
+      window.location.href = `mailto:halo@sipeen.example?subject=${subject}&body=${body}`;
+      msg.textContent = 'Membuka aplikasi email…';
+      form.reset();
+    });
+  </script>
+</body>
+</html>
